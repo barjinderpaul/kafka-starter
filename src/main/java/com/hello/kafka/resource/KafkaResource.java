@@ -1,25 +1,22 @@
 package com.hello.kafka.resource;
 
+import com.hello.kafka.model.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("kafka")
 public class KafkaResource {
 
     @Autowired
-    KafkaTemplate<String,String> kafkaTemplate;
+    KafkaTemplate<String, Post> kafkaTemplate;
 
     private static final String topic = "hi.kafka";
 
-    @GetMapping("/publish/message/{message}")
-    public String publishMessage(@PathVariable("message") String message) {
-        kafkaTemplate.send(topic,message);
-        return "Message : " + message + " published sucessfully";
+    @PostMapping("/publish/post")
+    public String publishMessage(@RequestBody Post post) {
+        kafkaTemplate.send(topic,post);
+        return "Post with title : " + post.getTitle() + " published successfully";
     }
-
 }
