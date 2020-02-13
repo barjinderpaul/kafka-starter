@@ -1,4 +1,4 @@
-package com.hello.kafka.hellokafka;
+package com.hello.kafka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
